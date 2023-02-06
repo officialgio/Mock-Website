@@ -7,6 +7,7 @@
     --clr-dark: #1C1D20;
     --clr-light: 231 77% 90%;
     --clr-white: #f5f5f7;
+    --clr-lightblue: rgb(86, 124, 228);
   
     --apple-green: rgb(52, 199, 89);
     --apple-red: rgb(255, 59, 48);
@@ -115,12 +116,14 @@ h6 {
 }
 
 .header__nav {
+    position: relative;
     min-height: 10vh;
     align-items: center;
     justify-content: space-between;
     color: white;
     width: 80%;
     margin: auto;
+    z-index: 10;
 }
 
 .header__nav__line1,
@@ -140,6 +143,7 @@ h6 {
     align-items: center;
     color: var(--clr-white);
     border: 1px solid limegreen;
+    background-color: var(--clr-dark) /* must include for blend mode */
 }
 
 .section__hero__description {
@@ -168,7 +172,7 @@ h6 {
 }
 
 .section__mountain__span {
-    color: var(--apple-blue);
+    color: var(--clr-lightblue);
 }
 
 .section__hike__span {
@@ -252,6 +256,56 @@ h6 {
     height: 3rem;
     border: 2px solid white;
     border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: all 250ms ease-in-out;
+    transition-property: background, transform;
+    transform-origin: 75% 75%;
+}
+
+.cursor.nav-active {
+    background: var(--clr-lightblue);
+    transform: scale(3);
+}
+
+.cursor.explore-active {
+    background-color: #fff;
+    transform: scale(3);
+}
+
+.cursor__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 0.5rem;
+    transform: translate(-50%, -50%);
+}
+
+.section__hero__description__title {
+    position: relative;
+    overflow: hidden;
+}
+
+.section__title__swipe {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    mix-blend-mode: darken;
+    transform: translateY(100%);
+}
+
+.t-swipe1 {
+    background-color: var(--clr-lightblue);
+}
+
+.t-swipe2 {
+    background-color: var(--apple-light-purple);
+}
+
+.t-swipe3 {
+    background-color: var(--apple-orange);
 }
 
 .scrollmagic-pin-spacer {

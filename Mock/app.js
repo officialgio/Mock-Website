@@ -27,10 +27,10 @@ function animateSlides() {
 
         // First Animation 
         const slideTl = gsap.timeline({ defaults: { duration: 1, ease: 'power2.inOut' } });
-        slideTl.fromTo(revealImg, { x: '0%' }, { x: '100%' });
+        slideTl.fromTo(revealImg, { x: '0%' }, { x: '100%' },);
         slideTl.fromTo(img, { scale: 2 }, { scale: 1 }, '-=1');
         slideTl.fromTo(revealText, { x: '0%' }, { x: '100%' }, '-=0.75');
-        slideTl.fromTo(nav, { y: '-100%' }, { y: '0%' }, '-=0.5');
+        slideTl.fromTo(nav, { y: '-80%' }, { y: '0%' }, '-=0.5');
 
         // Create Scene 
         slideScene = new ScrollMagic.Scene({
@@ -58,7 +58,7 @@ function animateSlides() {
             triggerHook: 0
         })
             .addIndicators({ colorStart: 'white', colorTrigger: 'white', name: 'page', indent: 200 })
-            .setPin(slide, {pushFollowers: false}) // Controlls based on the scroll of the mouse
+            .setPin(slide, { pushFollowers: false }) // Controlls based on the scroll of the mouse
             .setTween(pageTl)
             .addTo(controller)
     })
@@ -86,6 +86,47 @@ function animateSlides() {
     //         .addTo(controller);
 
 }
+
+const mouse = document.querySelector('.cursor');
+const mouseTxt = mouse.querySelector('span');
+const burger = document.querySelector('.header__nav__burger');
+
+function cursor(e) {
+    mouse.style.top = e.pageY + 'px';
+    mouse.style.left = e.pageX + 'px';
+}
+
+function activeCursor(e) {
+    const item = e.target;
+    if (item.id === 'logo' || item.classList.contains('header__nav__burger')) {
+        mouse.classList.add('nav-active');
+    } else {
+        mouse.classList.remove('nav-active');
+    }
+
+
+    if (item.classList.contains('section__explore')) {
+        mouse.classList.add('explore-active');
+        gsap.to('.section__title__swipe', 1, { y: '0%' });
+        mouseTxt.innerText = 'Tap';
+    } else {
+        mouse.classList.remove('explore-active');
+        mouseTxt.innerText = '';
+        gsap.to('.section__title__swipe', 1, { y: '100%' });
+    }
+
+}
+
+function navToggle(e) {
+    gsap.to('.header__nav__line1', 0.5, { rotate: '45', y: 5});
+    gsap.to('.header__nav__line2', 0.5, { rotate: '-45', y: -5 });
+    gsap.to('.nav__bar', 1, {clipPath: 'circle(2500px at 100% -10%)'});
+}
+
+// Event handlers
+burger.addEventListener('click', navToggle);
+window.addEventListener('mousemove', cursor);
+window.addEventListener('mouseover', activeCursor);
 
 animateSlides();
 
