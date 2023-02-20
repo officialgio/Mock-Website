@@ -91,11 +91,20 @@ const mouse = document.querySelector('.cursor');
 const mouseTxt = mouse.querySelector('span');
 const burger = document.querySelector('.header__nav__burger');
 
+// This functuin handles having the circle div attached on mousemove
 function cursor(e) {
     mouse.style.top = e.pageY + 'px';
     mouse.style.left = e.pageX + 'px';
 }
 
+
+/**
+ * This function handles adding div adjust circle to a hover (mouseover) in any of 
+ * the following conditions.
+ * 
+ * 
+ * @param {e} event
+ */
 function activeCursor(e) {
     const item = e.target;
     if (item.id === 'logo' || item.classList.contains('header__nav__burger')) {
@@ -103,7 +112,6 @@ function activeCursor(e) {
     } else {
         mouse.classList.remove('nav-active');
     }
-
 
     if (item.classList.contains('section__explore')) {
         mouse.classList.add('explore-active');
@@ -117,6 +125,10 @@ function activeCursor(e) {
 
 }
 
+/**
+ * This function handles opening up the burger menu
+ * @param {event} e 
+ */
 function navToggle(e) {
     gsap.to('.header__nav__line1', 0.5, { rotate: '45', y: 5});
     gsap.to('.header__nav__line2', 0.5, { rotate: '-45', y: -5 });

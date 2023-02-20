@@ -103,8 +103,17 @@ h6 {
     overflow-wrap: break-word;
 }
 
-#logo {
-    color: white;
+/* remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 .flex {
@@ -113,6 +122,11 @@ h6 {
 
 .flex-1 {
     flex: 1;
+}
+
+#logo {
+    margin: 1.5rem clamp(1.5rem, 5vw, 3.5rem);
+    color: var(--gradient-color);
 }
 
 .header__nav {
@@ -323,6 +337,10 @@ h6 {
 
 /* typography */
 
+.uppercase {
+    text-transform: uppercase;
+}
+
 .fs-800 {
     font-size: var(--fs-800);
 }
@@ -349,4 +367,11 @@ h6 {
 
 .fs-200 {
     font-size: var(--fs-200);
+}
+
+.fs-logo {
+    font-weight: var(--fs-logo);
+    font-size: var(--fs-600);
+    letter-spacing: 2rem;
+    text-decoration: none;
 }
