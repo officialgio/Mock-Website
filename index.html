@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body>
+<body data-barba="wrapper">
     <header class="header__nav fs-300 flex">
         <h1><a href="./index.html" id="logo" class="fs-logo uppercase">Mock</a></h1>
         <div class="header__nav__burger">
@@ -18,7 +18,7 @@
         </div>
     </header>
 
-    <main>
+    <main data-barba="container" data-barba-namespace="home">
         <!-- 1st -->
         <section class="section__mountain slide flex">
             <div class="section__hero__img flex-1">
@@ -33,7 +33,7 @@
                 <p class="fs-500"> This is a random paragraph you can modify. This is a random paragraph you can modify.
                     This is a
                     random paragraph you can modify.</p>
-                <a class="section__explore mountain-exp">Explore</a>
+                <a href="./fashion/index.html" class="section__explore mountain-exp">Explore</a>
                 <div class="reveal-text"></div>
             </div>
         </section>

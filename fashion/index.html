@@ -9,17 +9,62 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 
-<body>
+<body data-barba="wrapper">
     <header class="header__nav fs-300 flex">
-        <h1><a href="../fashion/index.html" id="logo" class="fs-logo uppercase">Mock</a></h1>
+        <h1><a href="../index.html" id="logo" class="fs-logo uppercase">Mock</a></h1>
         <div class="header__nav__burger">
             <div class="header__nav__line1"></div>
             <div class="header__nav__line2"></div>
         </div>
     </header>
 
-    <main>
+    <main data-barba="container" data-barba-namespace="fashion">
+        <!-- fashion1 -->
+        <section class="fashion1 detail-slide flex">
+            <div class="fashion__text flex-1">
+                <h1 class="fs-800">Luiza Bubzy</h1>
+                <p class="fs-400">his is a random paragraph you can modify. This is a random paragraph you can modify.
+                    his is a random
+                    paragraph you can modify. This is a random paragraph you can modify.</p>
+            </div>
+            <div class="fashion__image">
 
+                <img src="../assets/fashion-img1.png" alt="">
+
+            </div>
+            <div class="fashion-nr"><span>01</span></div>
+        </section>
+
+        <!-- fashion2 -->
+        <section class="fashion2 detail-slide flex">
+            <div class="fashion__text flex-1">
+                <h1 class="fs-800">Luiza Bubzy</h1>
+                <p class="fs-400">his is a random paragraph you can modify. This is a random paragraph you can modify.
+                    his is a random
+                    paragraph you can modify. This is a random paragraph you can modify.</p>
+            </div>
+            <div class="fashion__image">
+
+                <img src="../assets/fashion-img2.png" alt="">
+            </div>
+            <div class="fashion-nr"><span>02</span></div>
+        </section>
+
+        <!-- fashion3 -->
+        <section class="fashion3 detail-slide flex">
+            <div class="fashion__text flex-1">
+                <h1 class="fs-800">Luiza Bubzy</h1>
+                <p class="fs-400">his is a random paragraph you can modify. This is a random paragraph you can modify.
+                    his is a random
+                    paragraph you can modify. This is a random paragraph you can modify.</p>
+            </div>
+            <div class="fashion__image">
+                <picture>
+                    <img src="../assets/fashion-img3.png" alt="">
+                </picture>
+            </div>
+            <div class="fashion-nr"><span>03</span></div>
+        </section>
     </main>
 
     <!-- navigation bar -->
@@ -62,7 +107,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"
         integrity="sha512-f8mwTB+Bs8a5c46DEm7HQLcJuHMBaH/UFlcgyetMqqkvTcYg4g5VXsYR71b3qC82lZytjNYvBj2pf0VekA9/FQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./app.js"></script>
+    <script src="../app.js"></script>
 </body>
 
 </html>

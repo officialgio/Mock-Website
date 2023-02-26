@@ -11,11 +11,16 @@
   
     --apple-green: rgb(52, 199, 89);
     --apple-red: rgb(255, 59, 48);
+
     --apple-cyan: rgb(50, 173, 230);
     --apple-blue: rgb(0, 122, 255);
+
     --apple-purple: rgb(88, 86, 214);
     --apple-light-purple: rgb(167, 110, 231);
+
     --apple-orange: rgb(255, 149, 0);
+    --clr-orange: rgb(255, 139, 93);
+
     --apple-gray: rgb(72, 72, 74);
   
     --gradient-color: linear-gradient(90deg, #2ca2b4, #5598de 24%, #7f87ff 45%, #f65aad 76%, #ec3d43);
@@ -68,6 +73,11 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    position: relative; /* BarbaJS transition bug fix */
+}
+
+main {
+    position: absolute; /* BarbaJS transition bug fix */
 }
 
 img,
@@ -331,15 +341,66 @@ body.hide {
 }
 
 
+/* OTHER PAGES */
+.fashion1, .fashion2, .fashion3 {
+    min-height: 90vh;
+    justify-content: center;
+    align-items: center;
+    width: max(70%, 600px);
+    /* width: 70%; */
+    margin: auto;
+    /* margin-top: 5rem; */
+    color: var(--clr-white);
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.fashion__image {
+    height: 70vh;
+    flex-basis: 30rem;
+    position: relative;
+    padding: 4em;
+}
+
+.fashion__image picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+}
+
+.fashion__text h1 {
+    padding: 5rem 0rem;
+}
 
 
+.fashion1 h1 {
+    color: var(--clr-orange);
+}
 
+.fashion2 h1 {
+    color: var(--apple-light-purple);
+}
 
+.fashion3 h1 {
+    color: var(--clr-lightblue);
+}
 
+.fashion__text {
+    padding: 2rem 2rem 0rem 0rem;
+    margin-bottom: 10rem;
+}
 
+.fashion-nr {
+    position: absolute;
+    left: 40%;
+    bottom: 0;
+    opacity: 0.2;
+    font-size: 10rem;
+    color: var(--clr-white);
+}
 
-
-/* typography */
+/* typo4graphy */
 
 .uppercase {
     text-transform: uppercase;

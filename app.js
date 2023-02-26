@@ -12,7 +12,7 @@ let pageScene;
 
 function animateSlides() {
     // init controller
-    const controller = new ScrollMagic.Controller();
+    controller = new ScrollMagic.Controller();
 
     //Selectors
     const sliders = document.querySelectorAll('.slide');
@@ -110,14 +110,14 @@ function activeCursor(e) {
 function navToggle(e) {
     if (!e.target.classList.contains('active')) {
         e.target.classList.add('active');
-        gsap.to('.header__nav__line1', 0.5, { rotate: '45', y: 5, background: 'black'});
+        gsap.to('.header__nav__line1', 0.5, { rotate: '45', y: 5, background: 'black' });
         gsap.to('.header__nav__line2', 0.5, { rotate: '-45', y: -5, background: 'black' });
         gsap.to('.nav__bar', 1, { clipPath: 'circle(2500px at 100% -10%)' });
         gsap.to('#logo', 1, { color: 'black' });
         document.body.classList.add('hide');
     } else {
         e.target.classList.remove('active');
-        gsap.to('.header__nav__line1', 0.5, { rotate: '0', y: 0, background: 'white'});
+        gsap.to('.header__nav__line1', 0.5, { rotate: '0', y: 0, background: 'white' });
         gsap.to('.header__nav__line2', 0.5, { rotate: '0', y: 0, background: 'white' });
         gsap.to('.nav__bar', 1, { clipPath: 'circle(50px at 100% -10%)' });
         gsap.to('#logo', 1, { color: 'white' });
@@ -125,10 +125,66 @@ function navToggle(e) {
     }
 }
 
+// Barba Page Transitions
+
+
+/**
+ * Before entering to the main page we call @method animateSlides()
+ * Before leaving the main page we destroy the controller & scenes.
+ * 
+ * When leaving the current page do a fade-out transition
+ * When entering the next page do a fade-in transition
+ */
+
+const logo = document.querySelector('#logo');
+
+barba.init({
+    views: [
+        {
+            namespace: 'home',
+            beforeEnter() {
+                animateSlides();
+                logo.href = './index.html'; // UPDATE
+            },
+            beforeLeave() {
+                console.log('beforeLeave called');
+                slideScene.destroy();
+                pageScene.destroy();
+                controller.destroy();
+            }
+        },
+        {
+            namespace: 'fashion',
+            beforeEnter() {
+                logo.href = '../index.html'; // UPDATE
+            }
+        }
+    ],
+    transitions: [
+        {
+            leave({ current, next }) {
+                let done = this.async();
+                const tl = gsap.timeline({ default: { ease: 'power2.inOut' } });
+                tl.fromTo(current.container, 1, { opacity: 1 }, { opacity: 0, onComplete: done });
+
+            },
+            enter({ current, next }) {
+                // Scroll to top
+                window.scrollTo(0, 0);
+                let done = this.async();
+                const tl = gsap.timeline({ default: { ease: 'power2.inOut' } });
+                tl.fromTo(next.container, 1, { opacity: 0 }, { opacity: 1, onComplete: done });
+            }
+        }
+    ]
+})
+
+
+
+
+
+
 // Event handlers
 burger.addEventListener('click', navToggle);
 window.addEventListener('mousemove', cursor);
 window.addEventListener('mouseover', activeCursor);
-
-animateSlides();
-
