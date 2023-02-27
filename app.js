@@ -9,6 +9,7 @@
 let controller;
 let slideScene;
 let pageScene;
+let detailScene;
 
 function animateSlides() {
     // init controller
@@ -27,8 +28,8 @@ function animateSlides() {
         const slideTl = gsap.timeline({ defaults: { duration: 1, ease: 'power2.inOut' } });
         slideTl.fromTo(revealImg, { x: '0%' }, { x: '100%' },);
         slideTl.fromTo(img, { scale: 2 }, { scale: 1 }, '-=1');
-        slideTl.fromTo(revealText, { x: '0%' }, { x: '100%' }, '-=0.75');
-        slideTl.fromTo(nav, { y: '-80%' }, { y: '0%' }, '-=0.5');
+        slideTl.fromTo(revealText, { x: '0%' }, { x: '100%', display: 'none' }, '-=0.75');
+        // slideTl.fromTo(nav, { y: '-80%' }, { y: '0%' }, '-=0.5');
 
         // Create Scene 
         slideScene = new ScrollMagic.Scene({
@@ -36,7 +37,7 @@ function animateSlides() {
             triggerHook: 0.25 // adjust depending on viewport trigger
         })
             .setTween(slideTl)
-            .addIndicators({ colorStart: 'white', colorTrigger: 'white', name: 'slide' })
+            // .addIndicators({ colorStart: 'white', colorTrigger: 'white', name: 'slide' })
             .addTo(controller);
 
         // Second Animation
@@ -55,7 +56,7 @@ function animateSlides() {
             duration: '100%', // duration of width (end-page)
             triggerHook: 0
         })
-            .addIndicators({ colorStart: 'red', colorTrigger: 'red', name: 'page', indent: 200 })
+            // .addIndicators({ colorStart: 'red', colorTrigger: 'red', name: 'page', indent: 200 })
             .setPin(slide, { pushFollowers: false }) // Controlls based on the scroll of the mouse
             .setTween(pageTl)
             .addTo(controller)
@@ -134,6 +135,9 @@ function navToggle(e) {
  * 
  * When leaving the current page do a fade-out transition
  * When entering the next page do a fade-in transition
+ * 
+ * When leaving the current page do a swiping effect of 0.75sec from where is not seen to 0%
+ * When entering the next page from 0% do swipe effect of 1sec to 100% sequentially.
  */
 
 const logo = document.querySelector('#logo');
@@ -157,6 +161,11 @@ barba.init({
             namespace: 'fashion',
             beforeEnter() {
                 logo.href = '../index.html'; // UPDATE
+                detailAnimation();
+            },
+            beforeLeave() {
+                controller.destroy();
+                detailScene.destroy();
             }
         }
     ],
@@ -165,7 +174,8 @@ barba.init({
             leave({ current, next }) {
                 let done = this.async();
                 const tl = gsap.timeline({ default: { ease: 'power2.inOut' } });
-                tl.fromTo(current.container, 1, { opacity: 1 }, { opacity: 0, onComplete: done });
+                tl.fromTo(current.container, 1, { opacity: 1 }, { opacity: 0 });
+                tl.fromTo('.swipe', 0.75, { x: '-100%' }, { x: '0%', onComplete: done }, '-=0.5');
 
             },
             enter({ current, next }) {
@@ -173,12 +183,43 @@ barba.init({
                 window.scrollTo(0, 0);
                 let done = this.async();
                 const tl = gsap.timeline({ default: { ease: 'power2.inOut' } });
-                tl.fromTo(next.container, 1, { opacity: 0 }, { opacity: 1, onComplete: done });
+                tl.fromTo('.swipe', 1, { x: '0' }, { x: '100%', stagger: 0.25, onComplete: done });
+                tl.fromTo(next.container, 1, { opacity: 0 }, { opacity: 1 });
+                tl.fromTo('.header__nav', 2, { y: '-100%' }, { y: "0%", ease: 'power2.inOut' }, '-=1.5')
+                
+
             }
         }
     ]
 })
 
+
+function detailAnimation() {
+    controller = new ScrollMagic.Controller();
+    const slides = document.querySelectorAll('.detail-slide');
+
+    slides.forEach((slide, index, slides) => {
+        const slideTl = gsap.timeline({ defaults: { duration: 1 } });
+        let nextSlide = slides.length - 1 === index ? 'end' : slides[index + 1];
+        const nextImg = nextSlide.querySelector('img');
+        slideTl.fromTo(slide, { opacity: 1 }, { opacity: 0 });
+        slideTl.fromTo(nextSlide, { opacity: 0 }, { opacity: 1 }, '-=1');
+        slideTl.fromTo(nextSlide, { y: '0%' }, { y: '20%' }); // trick for keeing page (push content down)
+        slideTl.fromTo(nextImg, { x: '50%' }, { x: '0%' });
+        slideTl.fromTo(nextSlide, { y: '20%' }, { y: '0%' });
+
+        // Scene
+        detailScene = new ScrollMagic.Scene({
+            triggerElement: slide,
+            duration: '100%',
+            triggerHook: 0
+        })
+            .setPin(slide, { pushFollowers: false })
+            .setTween(slideTl)
+            // .addIndicators({colorStart: 'white', colorTrigger: 'white', name: 'detailScene' })
+            .addTo(controller);
+    });
+}
 
 
 
