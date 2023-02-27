@@ -28,7 +28,7 @@ function animateSlides() {
         const slideTl = gsap.timeline({ defaults: { duration: 1, ease: 'power2.inOut' } });
         slideTl.fromTo(revealImg, { x: '0%' }, { x: '100%' },);
         slideTl.fromTo(img, { scale: 2 }, { scale: 1 }, '-=1');
-        slideTl.fromTo(revealText, { x: '0%' }, { x: '100%', display: 'none' }, '-=0.75');
+        slideTl.fromTo(revealText, { x: '0%' }, { x: '100%' }, '-=0.75');
         // slideTl.fromTo(nav, { y: '-80%' }, { y: '0%' }, '-=0.5');
 
         // Create Scene 
@@ -186,14 +186,15 @@ barba.init({
                 tl.fromTo('.swipe', 1, { x: '0' }, { x: '100%', stagger: 0.25, onComplete: done });
                 tl.fromTo(next.container, 1, { opacity: 0 }, { opacity: 1 });
                 tl.fromTo('.header__nav', 2, { y: '-100%' }, { y: "0%", ease: 'power2.inOut' }, '-=1.5')
-                
-
             }
         }
     ]
 })
 
 
+/**
+ * This is similar function to the main page. 
+ */
 function detailAnimation() {
     controller = new ScrollMagic.Controller();
     const slides = document.querySelectorAll('.detail-slide');
@@ -220,10 +221,6 @@ function detailAnimation() {
             .addTo(controller);
     });
 }
-
-
-
-
 
 // Event handlers
 burger.addEventListener('click', navToggle);

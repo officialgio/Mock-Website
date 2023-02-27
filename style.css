@@ -29,8 +29,8 @@
     /* font-sizes */
     --fs-900: clamp(5rem, 8vw + 1rem, 9.375rem);
     --fs-800: 6.25rem;
-    --fs-700: 3.5rem;
-    --fs-600: 2rem;
+    --fs-700: clamp( 3.2rem, 3rem + 0.2vw, 2.9rem);
+    --fs-600: clamp(2rem, 1.6rem + 0.25vw, 1.92rem);
     --fs-500: clamp(1.35rem, 1.15rem + 0.50vw, 1.86rem);
     --fs-400: 1.125rem;
     --fs-300: clamp(1rem, 0.94rem - 0.02vw, 1.125rem);
@@ -366,13 +366,11 @@ body.hide {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    
 }
 
 .fashion__text h1 {
     padding: 5rem 0rem;
 }
-
 
 .fashion1 h1 {
     color: var(--clr-orange);
@@ -479,29 +477,45 @@ body.hide {
     .fashion__text {
         padding: 0;
         margin: 0;
-
     }
 
     .fashion__text h1 {
         padding: 0rem;
+        font-size: var(--fs-600);
     }
 
     .fashion__text p {
         margin-bottom: 0;
         padding: 0;
+        padding-top: 1em;
+        padding-inline: 2rem;
+    }
+
+    .fashion__image {
+        padding: 1.2rem 2rem;
     }
 
     .fashion-nr {
         display: none;
     }
 
+
+    /************* NAV STUFF *************/
+
     .nav__bar {
         display: block;
     }
 
     .nav__bar__links {
-        font-size: var(--fs-500);
-        padding: 3.2rem 0rem;
+        margin-inline: 1.2rem;
+        margin-top: 2rem;
+        padding: 2rem 2rem;
+    }
+
+    .nav__bar__links h3 {
+        padding: 1rem;
+        padding-top: 4rem;
+        font-size: var(--fs-700);
     }
 
     .nav__bar__contact {
@@ -527,29 +541,67 @@ body.hide {
         display: none;
     }
 
-    .reveal-text {
+    .reveal-text,
+    .reveal-img {
         height: 120%;
     }
+
+    .scrollmagic-pin-spacer {
+        position: static !important;
+        overflow-x: hidden;
+    }   
 }
 
 
-
-
-}
-
-
-/* Tablet */
-@media (min-width: 45em) {
+/* Desktop */
+@media only screen and (min-width: 900px) {
     body {
-        background-color: purple !important;
+        /* background-color: purple !important; */
     }
 
+    .slide {
+        display: flex;
+    }
+
+    .section__hero__img {
+        padding: 6rem;
+        
+    }
+
+    .section__hero__description__title h2 {
+        font-size: var(--fs-700);
+        padding-inline: 8rem;
+    }
+
+    .section__hero__description p {
+        padding-inline: 6rem;
+    }
+
+    .section__explore {
+        width: auto;
+    }
+
+    .fashion__text h1 {
+        padding: 0rem;
+        font-size: var(--fs-900);
+    }
+
+    .fashion__text p {
+        margin-bottom: 0;
+        padding-top: 1em;
+        padding-inline: 5rem;
+    }
+
+    .fashion1, .fashion2, .fashion3 {
+        flex-wrap: nowrap;
+        flex-direction: row;
+        overflow-x: hidden;
+    }
+
+    .nav__bar__links {
+        text-align: center;
+    }
 }
-
-
-
-
-
 
 /* typo4graphy */
 
