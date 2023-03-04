@@ -546,17 +546,16 @@ body.hide {
         height: 120%;
     }
 
-    .scrollmagic-pin-spacer {
-        position: static !important;
-        overflow-x: hidden;
-    }   
 }
-
 
 /* Desktop */
 @media only screen and (min-width: 900px) {
     body {
         /* background-color: purple !important; */
+    }
+
+    .cursor.nav-active {
+        display: flex;
     }
 
     .slide {
